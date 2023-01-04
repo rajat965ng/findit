@@ -1,0 +1,179 @@
+basePath: /api/v1
+definitions:
+  model.Repository:
+    type: object
+host: localhost:8080
+info:
+  contact:
+    email: support@swagger.io
+    name: API Support
+    url: http://www.swagger.io/support
+  description: This is a sample server Petstore server.
+  license:
+    name: Apache 2.0
+    url: http://www.apache.org/licenses/LICENSE-2.0.html
+  termsOfService: http://swagger.io/terms/
+  title: GuardRails Findings API
+  version: "1.0"
+paths:
+  /repository:
+    get:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name and url !!
+          schema:
+            type: string
+      summary: Find all repositories from the store
+      tags:
+      - admin
+    post:
+      consumes:
+      - application/json
+      parameters:
+      - description: Repository Data
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/model.Repository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name and url !!
+          schema:
+            type: string
+      summary: Add a new repository to the store
+      tags:
+      - admin
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Repository Data
+        in: body
+        name: message
+        required: true
+        schema:
+          $ref: '#/definitions/model.Repository'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name and url !!
+          schema:
+            type: string
+      summary: Update details of exiting repository
+      tags:
+      - admin
+  /repository/{name}:
+    delete:
+      consumes:
+      - application/json
+      parameters:
+      - description: Repository name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name and url !!
+          schema:
+            type: string
+      summary: Delete exiting repository
+      tags:
+      - admin
+  /repository/{status}:
+    get:
+      consumes:
+      - application/json
+      parameters:
+      - description: string enums
+        enum:
+        - QUEUED
+        - INPROGRESS
+        - SUCCESS
+        - FAILURE
+        in: path
+        name: status
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name and url !!
+          schema:
+            type: string
+      summary: Find repositories by status
+      tags:
+      - admin
+  /repository/scan:
+    put:
+      consumes:
+      - application/json
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name !!
+          schema:
+            type: string
+      summary: Execute exiting repository for scanning
+      tags:
+      - admin
+  /repository/scan/{name}:
+    put:
+      consumes:
+      - application/json
+      parameters:
+      - description: Repository name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: ok
+          schema:
+            type: string
+        "400":
+          description: We need name !!
+          schema:
+            type: string
+      summary: Queue exiting repository for scanning
+      tags:
+      - admin
+swagger: "2.0"
